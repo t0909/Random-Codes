@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+    int data;
+    Node *left;
+    Node *right;
+    
+    
+    Node(int x)
+    {
+        data=x;
+        left= NULL;
+        right = NULL;
+        
+    }
+};
+
+Node * insert(Node *root, int x)
+{
+    Node *temp= new Node(x);
+    Node *parent= NULL;
+    Node *curr= root;
+    while(curr != NULL)
+    {
+        if(curr->data<x)
+        {
+            parent=curr;
+            curr=curr->right;
+        }
+       
+        
+        else if(curr->data> x)
+        {
+            parent= curr;
+            curr=curr->left;
+        }
+        
+        else 
+        return root;
+        
+    }
+    
+    if(parent== NULL)
+    return NULL;
+    
+    if(parent->data>x)
+    parent->left=temp;
+    
+    else
+    parent->right= temp;
+    
+    
+    return root;
+    
+}
+
+void inorder(Node * root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        cout<<root->data<<" ";
+        inorder(root->right);
+    }
+}
+
+
+int main()
+{
+    Node *obj = new Node(35);
+    obj->left = new Node(20);
+    obj->right= new Node(45);
+    insert(obj, 10);
+    insert(obj, 100);
+    inorder(obj);
+    
+    return 0;
+    
+    
+}
